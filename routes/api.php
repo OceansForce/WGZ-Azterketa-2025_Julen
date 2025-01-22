@@ -11,9 +11,9 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('ekitaldiak', [EkitaldiakController::class, 'index']);
-Route::post('E_crear', [EkitaldiakController::class , 'store']);
-Route::put('E_editar/{ekitaldiak}', [EkitaldiakController::class , 'update']);
-Route::delete('E_borrar/{ekitaldiak}', [EkitaldiakController::class , 'destroy']);
+Route::post('E_sortu', [EkitaldiakController::class , 'store']);
+Route::put('E_editatu/{ekitaldiak}', [EkitaldiakController::class , 'update']);
+Route::delete('E_ezabatu/{ekitaldiak}', [EkitaldiakController::class , 'destroy']);
 
 Route::get('dentistak', [UsersController::class, 'dentistak']);
 
