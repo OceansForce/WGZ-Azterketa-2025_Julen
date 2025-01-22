@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\users;
 
 class ekitaldiak extends Model
 {
@@ -23,8 +25,8 @@ class ekitaldiak extends Model
     ];
 
     // Relación muchos a muchos con Module
-    public function erabiltzaileak(): BelongsToMany
+    public function users(): BelongsToMany
     {
-        return $this->belongsToMany(erabiltzaileak::class,'users_ekitaldiak', 'id_ekitaldi', 'id_users');
+        return $this->belongsToMany(users::class,'users_ekitaldiaks', 'id_ekitaldi', 'id_users');
     }
 }

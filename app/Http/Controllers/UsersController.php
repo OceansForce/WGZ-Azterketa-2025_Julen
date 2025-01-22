@@ -6,45 +6,58 @@ use App\Http\Requests\StoreusersRequest;
 use App\Http\Requests\UpdateusersRequest;
 use App\Models\users;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function dentistak()
     {
-        //
+
+       $erabiltzailea = users::where('rola', 'dentista')->get();
+       //$users= users::all();
+
+       return response()->json($erabiltzailea);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreusersRequest $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(users $users)
-    {
-        //
-    }
+    public function login(Request $request){
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateusersRequest $request, users $users)
-    {
-        //
-    }
+        //Datuak balidatzeko
+        $request->validate([
+            'email'=> 'required|email',
+            'password'=>'required',
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(users $users)
+        // Encontrar el correo
+        $user = users::where('email', $request->email)->first();
+
+        if(!$user || $user->password !== $request->password){
+            return response()->json(['error' => 'Datuak gaixki daude'], 401);
+        }
+
+        $token = $user->createToken($request->email)->plainTextToken;
+
+        return response()->json([
+            'message' => 'Login egin da',
+            'user' => $user,
+            'token' => $token,
+        ]);
+    }
+    
+
+    public function logout(Request $request)
     {
-        //
+        $user= Auth::user();
+
+        if (!$user) {
+            // Revocar el token de acceso
+            return response()->json('No hay un usuario autenticado', 401);
+            
+        }
+
+        $user->tokens()->delete();
+        return response()->json('Has cerrado sesion correctamente');
+       
     }
 }

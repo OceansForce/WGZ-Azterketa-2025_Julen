@@ -12,24 +12,37 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    public $timestamps = false;
-
-    protected $table='users';
-    protected $primaryKey='id';
-
-    protected $fillable=[
-        'id',
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
         'name',
-        'abizena',
         'email',
-        'dni',
-        'jaiotze_data',
-        'rola',
+        'password',
     ];
 
-    // Relación muchos a muchos con Module
-    public function erabiltzaileak(): BelongsToMany
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
     {
-        return $this->belongsToMany(erabiltzaileak::class,'users_ekitaldiak', 'id_ekitaldi', 'id_users');
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
     }
 }
