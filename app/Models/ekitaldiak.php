@@ -2,29 +2,24 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class ekitaldiak extends Model
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
-
+    /** @use HasFactory<\Database\Factories\EkitaldiakFactory> */
+    use HasFactory;
+    
     public $timestamps = false;
 
-    protected $table='users';
+    protected $table='ekitaldiaks';
     protected $primaryKey='id';
 
     protected $fillable=[
         'id',
-        'name',
-        'abizena',
-        'email',
-        'dni',
-        'jaiotze_data',
-        'rola',
+        'izena',
+        'date',
+        'azalpena',
     ];
 
     // Relación muchos a muchos con Module
