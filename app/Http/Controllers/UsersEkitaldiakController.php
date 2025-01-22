@@ -17,21 +17,24 @@ class UsersEkitaldiakController extends Controller
         return response()->json($users->ekitaldiak);
     }
 
-    public function index()
-    {
-        $user = auth()->user();
-        if (!$user) {
-            return response()->json(['error' => 'User not authenticated'], 401);
-        }
-        $id= $user->id;
-        $erabiltzaileak = erabiltzaileak::findOrFail($id);
-        return response()->json($erabiltzaileak->moduluak);
-    }
-    
     public function partehartzaileak($id)
     {
         
         $users = ekitaldiak::findOrFail($id);
         return response()->json($users->users);
+    }
+
+    public function izenaeman($id){
+
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(['error' => 'User not authenticated'], 401);
+        }
+
+
+        $user->ekitaldiak()->attach($id);
+        
+
+        return response()->json('Ekitaldian gehituta');
     }
 }

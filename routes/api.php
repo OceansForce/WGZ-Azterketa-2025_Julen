@@ -23,3 +23,5 @@ Route::delete('logout', [UsersController::class, 'logout'])->middleware("auth:sa
 
 Route::get('/ekitaldiak/{id}', [UsersEkitaldiakController::class, 'ekitaldiak']);
 Route::get('/partehartzaileak/{id}', [UsersEkitaldiakController::class, 'partehartzaileak']);
+
+Route::post('izenaeman/{id}', [UsersEkitaldiakController::class, 'izenaeman'])->middleware("auth:sanctum");
