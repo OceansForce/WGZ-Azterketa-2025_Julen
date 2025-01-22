@@ -17,7 +17,8 @@ return new class extends Migration
 
             $table->primary(['id_users', 'id_ekitaldi']); 
 
-            $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_usersphp artisan migrate
+')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_ekitaldi')->references('id')->on('ekitaldiaks')->onDelete('cascade');
         });
 
