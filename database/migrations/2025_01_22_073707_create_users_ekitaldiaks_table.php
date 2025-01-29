@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users_ekitaldiaks', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_users'); 
+        Schema::create('ekitaldiak_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id'); 
             $table->unsignedBigInteger('id_ekitaldi'); 
 
-            $table->primary(['id_users', 'id_ekitaldi']); 
+            $table->primary(['user_id', 'id_ekitaldi'])    ; 
 
-            $table->foreign('id_usersphp artisan migrate
-')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_ekitaldi')->references('id')->on('ekitaldiaks')->onDelete('cascade');
         });
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users_ekitaldiaks');
+        Schema::dropIfExists('ekitaldiak_user');
     }
 };

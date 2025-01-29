@@ -35,6 +35,6 @@ class users extends Model
     
     public function ekitaldiak(): BelongsToMany
     {
-        return $this->belongsToMany(ekitaldiak::class,'users_ekitaldiaks', 'id_users', 'id_ekitaldi');
+        return $this->belongsToMany(ekitaldiak::class,'ekitaldiak_user', 'user_id', 'id_ekitaldi');
     }
 }

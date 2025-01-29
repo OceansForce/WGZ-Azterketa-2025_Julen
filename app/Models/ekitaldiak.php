@@ -27,6 +27,6 @@ class ekitaldiak extends Model
     // Relación muchos a muchos con Module
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(users::class,'users_ekitaldiaks', 'id_ekitaldi', 'id_users');
+        return $this->belongsToMany(users::class,'ekitaldiak_user', 'id_ekitaldi', 'user_id');
     }
 }

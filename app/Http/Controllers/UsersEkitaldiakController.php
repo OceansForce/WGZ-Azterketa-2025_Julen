@@ -14,7 +14,7 @@ class UsersEkitaldiakController extends Controller
     {
         
         $users = users::findOrFail($id);
-        return response()->json($users->ekitaldiak);
+        return response()->json($users->ekitaldiaks);
     }
 
     public function partehartzaileak($id)

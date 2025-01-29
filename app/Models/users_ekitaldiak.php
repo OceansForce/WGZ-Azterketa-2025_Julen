@@ -10,12 +10,12 @@ class users_ekitaldiak extends Model
     /** @use HasFactory<\Database\Factories\UsersEkitaldiakFactory> */
     use HasFactory;
 
-    protected $table = "users_ekitaldiaks";
+    protected $table = "ekitaldiak_user";
 
-    protected $primaryKey= ['id_users','id_ekitaldi'];
+    protected $primaryKey= ['user_id','id_ekitaldi'];
 
     protected $fillable = [
-        'id_users',
+        'user_id',
         'id_ekitaldi',
     ];
 }
